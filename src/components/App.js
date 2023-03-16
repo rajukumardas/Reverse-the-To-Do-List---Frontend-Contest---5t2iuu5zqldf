@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import '../styles/App.css';
 
-function ToDo() {
+function ToDo({todoId,createdAt}) {
   return (<tr>
     <td>
-      <p>id</p>
+      <p>{todoId}</p> 
     </td>
     <td>
-      <input />
+      <input placeholder="Enter your task" />
     </td>
     <td>
-      <p>createdAt</p>
+      <p>{createdAt}</p>
     </td>
   </tr>)
 }
@@ -24,12 +24,21 @@ function App() {
     createdAt: '18:00',
   }
   ]);
+  
+  const reverseOrder=()=> {
+    setTodos(prevTodos => [...prevTodos].reverse());
+  }
 
   return (
     <div id="main">
-      <button>Reverse</button>
+      <button onClick={reverseOrder}>Reverse</button>
       <table>
         <tbody>
+          {todos.map(todo=> (
+            <ToDo key={todo.id} todoId={todo.id} createdAt={todo.createdAt}>
+              Text
+              </ToDo>
+          ))}
         </tbody>
       </table>
     </div>
